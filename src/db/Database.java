@@ -13,13 +13,13 @@ public class Database {
 
     public static void add(Entity e) {
         e.id = nextId++;
-        entities.add(e);
+        entities.add(e.copy());
     }
 
     public static Entity get(int id) throws EntityNotFoundException {
         for (Entity e : entities) {
             if (e.id == id) {
-                return e;
+                return e.copy();
             }
         }
         throw new EntityNotFoundException(id);
@@ -32,6 +32,6 @@ public class Database {
 
     public static void update(Entity e) throws EntityNotFoundException {
         Entity existing = get(e.id);
-        entities.set(entities.indexOf(existing), e);
+        entities.set(entities.indexOf(existing), e.copy());
     }
 }
